@@ -13,20 +13,7 @@ public class Main{
 		System.out.println();
 		
 		if(args.length == 0 || args[0].equals("-h")){
-			System.out.println("Usage:");
-			System.out.println("    -h           -- print this help message");
-			System.out.println("    -s <seed>    -- seed (default random)");
-			System.out.println("    -r <num>     -- number of rotors by default");
-			System.out.println("                    it's ln(<length of message>)/ln(256)");
-			System.out.println("    -mlt         -- allow multirotation: if set,");
-			System.out.println("                    one byte change will affect each subsequent");
-			System.out.println("                    (disabled by default)");
-			System.out.println("    -m <message> -- the message");
-			System.out.println("    -d           -- decrypt");
-			System.out.println("    -h           -- hexadecimal input");
-			System.out.println();
-			System.out.println("Sample usage:");
-			System.out.println("    xenigma -r 4 -s 3476235876 -m \"the message to encrypt\"");
+			printHelp();
 			return;
 		}
 		
@@ -62,9 +49,13 @@ public class Main{
 					decrypt = true;
 					break;
 					
-				case "-h":
+				case "-hex":
 					hex = true;
 					break;
+					
+				case "-h":
+					printHelp();
+					return;
 					
 				default:
 					System.err.println("Unknown argument: " + args[i]);
@@ -106,5 +97,22 @@ public class Main{
 		System.out.println("Rotors: " + rotors);
 		System.out.println("Multirotation: " + mult);
 		System.out.println(":)");
+	}
+
+	private static void printHelp(){
+		System.out.println("Usage:");
+		System.out.println("    -h           -- print this help message");
+		System.out.println("    -s <seed>    -- seed (default random)");
+		System.out.println("    -r <num>     -- number of rotors by default");
+		System.out.println("                    it's ln(<length of message>)/ln(256)");
+		System.out.println("    -mlt         -- allow multirotation: if set,");
+		System.out.println("                    one byte change will affect each subsequent");
+		System.out.println("                    (disabled by default)");
+		System.out.println("    -m <message> -- the message");
+		System.out.println("    -d           -- decrypt");
+		System.out.println("    -hex         -- hexadecimal input");
+		System.out.println();
+		System.out.println("Sample usage:");
+		System.out.println("    xenigma -r 4 -s 3476235876 -hex -m \"the message to encrypt\"");
 	}
 }
